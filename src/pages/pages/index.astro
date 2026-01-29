@@ -11,7 +11,9 @@ import { /*STRAPI_URL,*/ strapiClient } from '~/utils/strapiClient';
 
 const title = 'Pages | Strapi CMS Astro Client';
 
-const { data: content } = (await strapiClient.collection('pages').find({
+const collectionName = 'pages';
+
+const { data: content } = (await strapiClient.collection(collectionName).find({
   populate: '*'
 })) as PagesResponse;
 
@@ -27,7 +29,8 @@ const code = JSON.stringify(content, null, 2);
     <h2>{title}</h2>
 
     <h3>
-      Loads the pages content ( populate = * ) by its default locale ( en )
+      Loads the {collectionName} content ( populate = * ) by its default locale (
+      en )
     </h3>
 
     <RenderTheCode {code} />
