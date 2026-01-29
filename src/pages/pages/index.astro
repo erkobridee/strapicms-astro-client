@@ -1,10 +1,21 @@
 ---
+import type { PagesResponse } from '~/types/Strapi';
+
 import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
+import RenderTheCode from '~/components/RenderTheCode.astro';
+
+import { /*STRAPI_URL,*/ strapiClient } from '~/utils/strapiClient';
+
+//---
 
 const title = 'Pages | Strapi CMS Astro Client';
 
-// TODO: define the related code logic
+const { data: content } = (await strapiClient.collection('pages').find({
+  populate: '*'
+})) as PagesResponse;
+
+const code = JSON.stringify(content, null, 2);
 ---
 
 <Layout
@@ -12,10 +23,12 @@ const title = 'Pages | Strapi CMS Astro Client';
     title
   }}
 >
-  <div class="grid h-screen place-items-center content-center space-y-4">
+  <div class="flex h-screen flex-col items-center justify-center gap-4 p-4">
     <h2>{title}</h2>
 
-    <p><strong>TODO:</strong> define the content to be rendered on this page</p>
+    <h3>Loads the pages content by its default locale ( en )</h3>
+
+    <RenderTheCode {code} />
 
     <Link href="/">Go home</Link>
   </div>
