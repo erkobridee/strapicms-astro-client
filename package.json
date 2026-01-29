@@ -1,0 +1,60 @@
+{
+  "name": "astro-ts-tw-hello",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "unset:git-hooks-path": "git config --unset core.hooksPath",
+    "simple-git-hooks": "npx simple-git-hooks",
+    "postinstall": "is-ci || npm run simple-git-hooks",
+    "prettier": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\"",
+    "eslint": "eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
+    "lint": "run-s prettier eslint",
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
+    "build": "astro check && astro build",
+    "preview": "astro preview --host",
+    "sync": "astro sync",
+    "astro": "astro",
+    "gh-pages-build": "cross-env GITHUB_PAGES=true npm run build",
+    "gh-pages-preview": "cross-env GITHUB_PAGES=true GITHUB_PAGES_PREVIEW=true npm run preview"
+  },
+  "dependencies": {
+    "astro": "5.16.16",
+    "canvas-confetti": "1.9.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.6",
+    "@astrojs/mdx": "4.3.13",
+    "@astrojs/ts-plugin": "1.10.6",
+    "@tailwindcss/vite": "4.1.18",
+    "@types/canvas-confetti": "1.9.0",
+    "@typescript-eslint/eslint-plugin": "8.54.0",
+    "@typescript-eslint/parser": "8.54.0",
+    "autoprefixer": "10.4.23",
+    "clsx": "2.1.1",
+    "cross-env": "10.1.0",
+    "eslint": "9.39.2",
+    "eslint-plugin-astro": "1.5.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "globals": "17.2.0",
+    "is-ci": "4.1.0",
+    "lint-staged": "16.2.7",
+    "npm-run-all2": "8.0.4",
+    "postcss": "8.5.6",
+    "prettier": "3.8.1",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-tailwindcss": "0.7.2",
+    "simple-git-hooks": "2.13.1",
+    "tailwind-merge": "3.4.0",
+    "tailwindcss": "4.1.18",
+    "typescript": "5.9.3"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,md,mdx,astro}": "prettier --write",
+    "src/**/*.{js,ts,jsx,tsx,astro}": "eslint --fix"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "github_pages": "https://erkobridee.github.io"
+}
