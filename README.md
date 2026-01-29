@@ -17,4 +17,11 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 ## Useful References
 
-- [Astro & Strapi Website Tutorial: Part 3 - Project Build | Strapi Blog](https://strapi.io/blog/astro-and-strapi-website-tutorial-part-3-project-build)
+- [Strapi Headless CMS](https://strapi.io/)
+
+- [Strapi & Astro | Astro Docs](https://docs.astro.build/en/guides/cms/strapi/)
+
+- [Integrate Astro with Strapi | Strapi](https://strapi.io/integrations/astro)
+
+- [Building faster content-driven sites with Astro | Strapi Blog](https://strapi.io/blog/building-faster-content-driven-sites-with-astro)
+  - [Astro & Strapi Website Tutorial: Part 3 - Project Build | Strapi Blog](https://strapi.io/blog/astro-and-strapi-website-tutorial-part-3-project-build)
