@@ -25,3 +25,8 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 - [Building faster content-driven sites with Astro | Strapi Blog](https://strapi.io/blog/building-faster-content-driven-sites-with-astro)
   - [Astro & Strapi Website Tutorial: Part 3 - Project Build | Strapi Blog](https://strapi.io/blog/astro-and-strapi-website-tutorial-part-3-project-build)
+
+- [Add Pagination & Infinite Scrolling in Astro.js Using Strapi 5 | Strapi Blog](https://strapi.io/blog/implement-pagination-and-infinite-scrolling-in-astro-js-with-strapi)
+
+- [Lightning Fast Building with Strapi & Astro | Strapi Blog](https://strapi.io/blog/lightning-fast-building-with-strapi-and-astro)
+  - [[GitHub] VirtusLab-Open-Source/astro-strapi-starter](https://github.com/VirtusLab-Open-Source/astro-strapi-starter) - The Strapi x Astro Starter template
