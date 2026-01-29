@@ -1,4 +1,4 @@
-# strapicms-astro-client
+# strapicms-astro-client [ 🚧 under development... 🚧 ]
 
 - Project template [[GitHub] erkobridee/astro-ts-tw-hello](https://github.com/erkobridee/astro-ts-tw-hello)
 
