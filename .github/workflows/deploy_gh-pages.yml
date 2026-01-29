@@ -23,6 +23,10 @@ permissions:
   id-token: write
 
 jobs:
+  # Quick Ways to Disable GitHub Actions Workflows Without Deletion
+  # https://safjan.com/quick-ways-to-disable-github-actions-workflows-without-deletion/
+  if: false # This disables the entire workflow
+
   build:
     runs-on: ubuntu-latest
     steps:
