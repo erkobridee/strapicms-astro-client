@@ -45,6 +45,15 @@ export interface Image extends BaseDocument, ImageBase {
 
 //----------------------------------------------------------------------------//
 
+// <STRAPI_CMS_HOST>/api/i18n/locales
+export interface Locale extends BaseDocument {
+  name: string;
+  code: string;
+  isDefault: boolean;
+}
+
+//----------------------------------------------------------------------------//
+
 // Strapi Collections Data Models
 
 export interface Page extends BaseDocument {
@@ -90,6 +99,10 @@ export interface Blog extends BaseDocument {
 //----------------------------------------------------------------------------//
 
 // Strapi Responses
+
+export type LocalesResponse = API.DocumentResponseCollection<Locale>;
+
+//---
 
 export type PagesResponse = API.DocumentResponseCollection<Page>;
 
