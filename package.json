@@ -16,7 +16,9 @@
     "sync": "astro sync",
     "astro": "astro",
     "gh-pages-build": "cross-env GITHUB_PAGES=true npm run build",
-    "gh-pages-preview": "cross-env GITHUB_PAGES=true GITHUB_PAGES_PREVIEW=true npm run preview"
+    "gh-pages-preview": "cross-env GITHUB_PAGES=true GITHUB_PAGES_PREVIEW=true npm run preview",
+    "gh-pages-deploy": "gh-pages -d dist",
+    "deploy": "run-s gh-pages-build gh-pages-deploy"
   },
   "dependencies": {
     "astro": "5.16.16",
@@ -37,6 +39,7 @@
     "eslint": "9.39.2",
     "eslint-plugin-astro": "1.5.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
+    "gh-pages": "^6.3.0",
     "globals": "17.2.0",
     "is-ci": "4.1.0",
     "lint-staged": "16.2.7",
