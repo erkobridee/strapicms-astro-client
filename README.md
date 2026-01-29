@@ -18,6 +18,11 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 ## Useful References
 
 - [Strapi Headless CMS](https://strapi.io/)
+  - [REST API reference](https://docs.strapi.io/cms/api/rest)
+
+  - [Strapi Client](https://docs.strapi.io/cms/api/client)
+
+  - [[GitHub] PaulBratslavsky/strapi-community-astro-loader](https://github.com/PaulBratslavsky/strapi-community-astro-loader) - [src/strapi-loader.ts](https://github.com/PaulBratslavsky/strapi-community-astro-loader/blob/6406c201987f7c37eb86256412c46e315f380e55/src/strapi-loader.ts#L61-L64)
 
 - [Strapi & Astro | Astro Docs](https://docs.astro.build/en/guides/cms/strapi/)
 
@@ -26,7 +31,13 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 - [Building faster content-driven sites with Astro | Strapi Blog](https://strapi.io/blog/building-faster-content-driven-sites-with-astro)
   - [Astro & Strapi Website Tutorial: Part 3 - Project Build | Strapi Blog](https://strapi.io/blog/astro-and-strapi-website-tutorial-part-3-project-build)
 
-- [Add Pagination & Infinite Scrolling in Astro.js Using Strapi 5 | Strapi Blog](https://strapi.io/blog/implement-pagination-and-infinite-scrolling-in-astro-js-with-strapi)
-
 - [Lightning Fast Building with Strapi & Astro | Strapi Blog](https://strapi.io/blog/lightning-fast-building-with-strapi-and-astro)
   - [[GitHub] VirtusLab-Open-Source/astro-strapi-starter](https://github.com/VirtusLab-Open-Source/astro-strapi-starter) - The Strapi x Astro Starter template
+
+- [Add Pagination & Infinite Scrolling in Astro.js Using Strapi 5 | Strapi Blog](https://strapi.io/blog/implement-pagination-and-infinite-scrolling-in-astro-js-with-strapi)
+  - [[GitHub] preshenv/astro_infinite_scrolling_app](https://github.com/preshenv/astro_infinite_scrolling_app)
+
+- [Build a custom loader with Astro and Strapi 5 | Strapi Blog](https://strapi.io/blog/how-to-create-a-custom-astro-loader-for-strapi-using-content-layer-api)
+  - [[GitHub] PaulBratslavsky/strapi-community-astro-loader](https://github.com/PaulBratslavsky/strapi-community-astro-loader)
+
+- [astro download headless cms images on build | Perplexity.ai](https://www.perplexity.ai/search/astro-download-headless-cms-im-fDKc3oryT9WVax82bPST.w)
