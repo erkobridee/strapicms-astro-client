@@ -1,0 +1,30 @@
+---
+import type { Locale } from '~/types/Strapi';
+
+import Layout from '~/layouts/main.astro';
+import Link from '~/components/Link.astro';
+
+import { STRAPI_BASE_URL } from '~/utils/strapiClient';
+
+//---
+
+const title = 'Locales | Strapi CMS Astro Client';
+
+const response = await fetch(`${STRAPI_BASE_URL}/i18n/locales`);
+
+const content = (await response.json()) as Locale[];
+---
+
+<Layout
+  content={{
+    title
+  }}
+>
+  <div class="grid h-screen place-items-center content-center space-y-4">
+    <h2>{title}</h2>
+
+    <pre class="text-xs"><code>{JSON.stringify(content, null, 2)}</code></pre>
+
+    <Link href="/">Go home</Link>
+  </div>
+</Layout>

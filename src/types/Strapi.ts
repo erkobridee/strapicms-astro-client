@@ -100,10 +100,6 @@ export interface Blog extends BaseDocument {
 
 // Strapi Responses
 
-export type LocalesResponse = API.DocumentResponseCollection<Locale>;
-
-//---
-
 export type PagesResponse = API.DocumentResponseCollection<Page>;
 
 export type TagsResponse = API.DocumentResponseCollection<Tag>;
