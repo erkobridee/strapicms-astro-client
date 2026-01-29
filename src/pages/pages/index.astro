@@ -26,7 +26,9 @@ const code = JSON.stringify(content, null, 2);
   <div class="flex h-screen flex-col items-center justify-center gap-4 p-4">
     <h2>{title}</h2>
 
-    <h3>Loads the pages content by its default locale ( en )</h3>
+    <h3>
+      Loads the pages content ( populate = * ) by its default locale ( en )
+    </h3>
 
     <RenderTheCode {code} />
 
