@@ -1,0 +1,19 @@
+---
+import cn from '~/utils/cn';
+
+interface Props {
+  class?: string;
+  code: string;
+}
+
+const { class: className, code }: Props = Astro.props;
+---
+
+<div class="rounded-2xl border border-gray-400 p-2">
+  <pre
+    class={cn(
+      'max-h-100 max-w-3xl',
+      'overflow-auto',
+      className
+    )}><code class="text-xs">{code}</code></pre>
+</div>
