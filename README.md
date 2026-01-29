@@ -19,8 +19,11 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 - [Strapi Headless CMS](https://strapi.io/)
   - [REST API reference](https://docs.strapi.io/cms/api/rest)
+    - [Build your query URL with Strapi's interactive tool](https://docs.strapi.io/cms/api/rest/interactive-query-builder)
 
   - [Strapi Client](https://docs.strapi.io/cms/api/client)
+    - [[GitHub] strapi/client](https://github.com/strapi/client) - A client library for easily interfacing with Strapi from your JavaScript/TypeScript project
+      - [demo/node-typescript](https://github.com/strapi/client/tree/e01be2ea130d5724f62bec4f4b5f4d20aee97d24/demo/node-typescript)
 
   - [[GitHub] PaulBratslavsky/strapi-community-astro-loader](https://github.com/PaulBratslavsky/strapi-community-astro-loader) - [src/strapi-loader.ts](https://github.com/PaulBratslavsky/strapi-community-astro-loader/blob/6406c201987f7c37eb86256412c46e315f380e55/src/strapi-loader.ts#L61-L64)
 
