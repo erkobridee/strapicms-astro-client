@@ -46,3 +46,14 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
   - [[GitHub] PaulBratslavsky/strapi-community-astro-loader](https://github.com/PaulBratslavsky/strapi-community-astro-loader)
 
 - [astro download headless cms images on build | Perplexity.ai](https://www.perplexity.ai/search/astro-download-headless-cms-im-fDKc3oryT9WVax82bPST.w)
+
+### Astro Content
+
+- [Content Layer: A Deep Dive | Astro Blog](https://astro.build/blog/content-layer-deep-dive/)
+
+- [Content collections | Guides - Astro Docs](https://docs.astro.build/en/guides/content-collections/)
+  - [Defining the collection loader](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-loader)
+
+- [Content Collections API Reference | Astro Docs](https://docs.astro.build/en/reference/modules/astro-content/)
+
+- [Astro Content Loader API | Astro Docs](https://docs.astro.build/en/reference/content-loader-reference/)
