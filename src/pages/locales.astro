@@ -1,19 +1,23 @@
 ---
-import type { Locale } from '~/types/Strapi';
+//import type { Locale } from '~/types/Strapi';
 
 import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
 import RenderTheCode from '~/components/RenderTheCode.astro';
 
-import { STRAPI_BASE_URL } from '~/utils/strapi/client';
+//import { STRAPI_BASE_URL } from '~/utils/strapi/client';
+
+import { getEntries } from '~/content/utils/tags';
 
 //---
 
 const title = 'Locales | Strapi CMS Astro Client';
-
+/*
 const response = await fetch(`${STRAPI_BASE_URL}/i18n/locales`);
 
 const content = (await response.json()) as Locale[];
+*/
+const content = await getEntries();
 
 const code = JSON.stringify(content, null, 2);
 ---
