@@ -13,32 +13,69 @@ import { strapiClient } from './client';
 
 //----------------------------------------------------------------------------//
 
-// TODO: review and redefine
-//
-// it to support passing an array of locales to be loaded,
-// but it should be also be possible to doesn't define it
-//
-
 export function strapiLoader({
   contentType,
   params,
   pluralContentType = `${contentType}s`,
   cacheDurationInMs = 0,
   pageSize = 25,
+  locales = [],
   skipSync = false
 }: StrapiLoaderOptions): Loader {
   const collection = strapiClient.collection(pluralContentType);
 
+  const loadData = async (
+    params: StrapiLoaderOptions['params'],
+    { store, logger, generateDigest, parseData }: LoaderContext
+  ) => {
+    logger.debug(`Fetching from Strapi with params: ${JSON.stringify(params)}`);
+
+    let currentPageNum = 1;
+    let totalPageCount = Number.MAX_SAFE_INTEGER; // TODO: is there a way to get this before paging?
+
+    do {
+      const paginatedParams = {
+        ...params,
+        pagination: { page: currentPageNum, pageSize }
+      } satisfies API.BaseQueryParams;
+
+      const {
+        data: page,
+        meta: { pagination }
+      } = await collection.find(paginatedParams);
+
+      for (const document of page) {
+        const documentId = document.documentId;
+        const locale = document.locale;
+
+        const id = locale ? `${locale}/${documentId}` : `${documentId}`;
+
+        const data = await parseData({ id, data: document });
+
+        const digest = generateDigest(data);
+
+        store.set({ id, digest, data });
+      }
+
+      invariant(
+        pagination,
+        'Strapi did not return pagination info. Can not page through content.'
+      );
+
+      totalPageCount = pagination.pageCount;
+
+      logger.info(`Stored page ${currentPageNum} of ${totalPageCount}.`);
+
+      currentPageNum++;
+    } while (currentPageNum <= totalPageCount);
+  };
+
   return {
     name: contentType,
 
-    load: async function ({
-      store,
-      meta,
-      logger,
-      generateDigest,
-      parseData
-    }: LoaderContext) {
+    load: async function (context: LoaderContext) {
+      const { meta, logger } = context;
+
       const lastSynced = meta.get('lastSynced');
 
       if (
@@ -49,44 +86,19 @@ export function strapiLoader({
         return;
       }
 
-      logger.debug(
-        `Fetching from Strapi with params: ${JSON.stringify(params)}`
-      );
-
-      let currentPageNum = 1;
-      let totalPageCount = Number.MAX_SAFE_INTEGER; // TODO: is there a way to get this before paging?
-
-      do {
-        const paginatedParams = {
-          ...params,
-          pagination: { page: currentPageNum, pageSize }
-        } satisfies API.BaseQueryParams;
-
-        const {
-          data: page,
-          meta: { pagination }
-        } = await collection.find(paginatedParams);
-
-        for (const document of page) {
-          const id = String(document.documentId);
-          const data = await parseData({ id, data: document });
-          const digest = generateDigest(data);
-          store.set({ id, digest, data });
+      if (locales.length > 0) {
+        for (const locale of locales) {
+          params = {
+            ...params,
+            locale
+          };
+          await loadData(params, context);
         }
+      } else {
+        await loadData(params, context);
+      }
 
-        invariant(
-          pagination,
-          'Strapi did not return pagination info. Can not page through content.'
-        );
-
-        meta.set('lastSynced', String(Date.now()));
-
-        totalPageCount = pagination.pageCount;
-
-        logger.info(`Stored page ${currentPageNum} of ${totalPageCount}.`);
-
-        currentPageNum++;
-      } while (currentPageNum <= totalPageCount);
+      meta.set('lastSynced', String(Date.now()));
     },
 
     schema: () => {

@@ -38,6 +38,8 @@ export const collection = defineCollection({
     // TODO: review
     params: { populate: '*' },
 
+    locales: ['en', 'pt-BR'],
+
     skipSync: isCIEnv
   }),
   schema: blogSchema

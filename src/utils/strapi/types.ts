@@ -36,6 +36,11 @@ export interface StrapiLoaderOptions {
    */
   pageSize?: number;
 
+  /**
+   * Make it possible to load multiple languages from the same Strapi collection
+   */
+  locales?: string[];
+
   /** avoid loading the content */
   skipSync?: boolean;
 }
