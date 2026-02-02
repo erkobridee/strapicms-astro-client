@@ -1,0 +1,59 @@
+---
+import type { TCollectionEntry } from '~/content/utils/blogs';
+
+import Layout from '~/layouts/main.astro';
+import Link from '~/components/Link.astro';
+import RenderTheCode from '~/components/RenderTheCode.astro';
+
+import { getEntries, mapByLocale } from '~/content/utils/blogs';
+
+import { locales } from '~/settings';
+
+//----------------------------------------------------------------------------//
+
+export async function getStaticPaths() {
+  const entries = await getEntries();
+
+  const entriesByLocale = mapByLocale(entries);
+
+  return locales.map((locale) => ({
+    params: { locale },
+    props: { content: entriesByLocale.get(locale) || [] }
+  }));
+}
+
+//----------------------------------------------------------------------------//
+
+interface Props {
+  content: TCollectionEntry[];
+}
+
+const { locale } = Astro.params;
+const { content }: Props = Astro.props;
+
+const code = JSON.stringify(content, null, 2);
+
+const title = `[ ${locale} ] Blogs | Strapi CMS Astro Client`;
+
+const collectionName = 'blogs';
+---
+
+<Layout
+  content={{
+    title
+  }}
+>
+  <div class="flex h-screen flex-col items-center justify-center gap-4 p-4">
+    <h2>{title}</h2>
+
+    <h3>
+      Loaded {collectionName} content ( populate = * ) [ length: {
+        content.length
+      } ]
+    </h3>
+
+    <RenderTheCode {code} />
+
+    <Link href="/">Go home</Link>
+  </div>
+</Layout>
