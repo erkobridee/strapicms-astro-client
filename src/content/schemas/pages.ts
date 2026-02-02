@@ -1,3 +1,37 @@
-// import { defineCollection, z } from "astro:content";
+import { defineCollection, z } from 'astro:content';
 
-// TODO: define the Zod schema definition and the astro collection
+import { baseDocumentSchema, imageSchema } from './strapi';
+
+import strapiLoader from '~/utils/strapi/loader';
+
+//----------------------------------------------------------------------------//
+
+const basePageSchema = baseDocumentSchema.extend({
+  title: z.string(),
+  slug: z.string(),
+
+  description: z.string().optional().nullable(),
+
+  body: z.string(),
+
+  cover: imageSchema.optional().nullable(),
+  coverAltText: z.string().optional().nullable(),
+
+  locale: z.string()
+});
+
+export const pageSchema = basePageSchema.extend({
+  localizations: z.array(basePageSchema).optional()
+});
+
+//----------------------------------------------------------------------------//
+
+export const collection = defineCollection({
+  loader: strapiLoader({
+    contentType: 'page',
+
+    // TODO: review
+    params: { populate: '*' }
+  }),
+  schema: pageSchema
+});
