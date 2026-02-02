@@ -1,11 +1,13 @@
 ---
-import type { PagesResponse } from '~/types/Strapi';
+//import type { PagesResponse } from '~/types/Strapi';
 
 import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
 import RenderTheCode from '~/components/RenderTheCode.astro';
 
-import { /*STRAPI_URL,*/ strapiClient } from '~/utils/strapi/client';
+//import { /*STRAPI_URL,*/ strapiClient } from '~/utils/strapi/client';
+
+import { getEntries } from '~/content/utils/pages';
 
 //---
 
@@ -13,9 +15,13 @@ const title = 'Pages | Strapi CMS Astro Client';
 
 const collectionName = 'pages';
 
+/*
 const { data: content } = (await strapiClient.collection(collectionName).find({
   populate: '*'
 })) as PagesResponse;
+*/
+
+const content = await getEntries();
 
 const code = JSON.stringify(content, null, 2);
 ---
