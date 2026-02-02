@@ -6,6 +6,8 @@ import strapiLoader from '~/utils/strapi/loader';
 
 import { isCIEnv } from '~/utils/env';
 
+import { locales, cacheDurationInMs } from '~/settings';
+
 //----------------------------------------------------------------------------//
 
 const baseTagSchema = baseDocumentSchema.extend({
@@ -28,9 +30,9 @@ export const collection = defineCollection({
     // TODO: review
     params: { populate: '*' },
 
-    cacheDurationInMs: 60000,
+    cacheDurationInMs,
 
-    locales: ['en', 'pt-BR'],
+    locales,
 
     skipSync: isCIEnv
   }),

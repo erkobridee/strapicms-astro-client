@@ -6,6 +6,10 @@ import mdx from '@astrojs/mdx';
 // https://tailwindcss.com/docs/installation/framework-guides/astro
 import tailwindcss from '@tailwindcss/vite';
 
+import { i18nConfig } from './src/settings';
+
+//----------------------------------------------------------------------------//
+
 // https://github.com/eslint/eslint/discussions/15305
 import { readFileSync } from 'fs';
 const packageJSON = JSON.parse(
@@ -18,7 +22,10 @@ const isGitHubPagesPreview = !!process.env.GITHUB_PAGES_PREVIEW;
 
 /** @type {import('astro').AstroUserConfig} */
 const baseConfig = {
+  i18n: i18nConfig,
+
   integrations: [mdx()],
+
   vite: {
     plugins: [tailwindcss()]
   }
