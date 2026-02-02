@@ -4,6 +4,8 @@ import { baseDocumentSchema, imageSchema } from './strapi';
 
 import strapiLoader from '~/utils/strapi/loader';
 
+import { isCIEnv } from '~/utils/env';
+
 //----------------------------------------------------------------------------//
 
 const basePageSchema = baseDocumentSchema.extend({
@@ -31,7 +33,9 @@ export const collection = defineCollection({
     contentType: 'page',
 
     // TODO: review
-    params: { populate: '*' }
+    params: { populate: '*' },
+
+    skipSync: isCIEnv
   }),
   schema: pageSchema
 });

@@ -5,6 +5,8 @@ import { tagSchema } from './tags';
 
 import strapiLoader from '~/utils/strapi/loader';
 
+import { isCIEnv } from '~/utils/env';
+
 //----------------------------------------------------------------------------//
 
 const baseBlogSchema = baseDocumentSchema.extend({
@@ -34,7 +36,9 @@ export const collection = defineCollection({
     contentType: 'blog',
 
     // TODO: review
-    params: { populate: '*' }
+    params: { populate: '*' },
+
+    skipSync: isCIEnv
   }),
   schema: blogSchema
 });

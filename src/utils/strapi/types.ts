@@ -35,4 +35,7 @@ export interface StrapiLoaderOptions {
    * @defaultValue 25
    */
   pageSize?: number;
+
+  /** avoid loading the content */
+  skipSync?: boolean;
 }

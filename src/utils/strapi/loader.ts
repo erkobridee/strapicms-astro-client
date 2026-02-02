@@ -24,7 +24,8 @@ export function strapiLoader({
   params,
   pluralContentType = `${contentType}s`,
   cacheDurationInMs = 0,
-  pageSize = 25
+  pageSize = 25,
+  skipSync = false
 }: StrapiLoaderOptions): Loader {
   const collection = strapiClient.collection(pluralContentType);
 
@@ -40,7 +41,10 @@ export function strapiLoader({
     }: LoaderContext) {
       const lastSynced = meta.get('lastSynced');
 
-      if (lastSynced && Date.now() - Number(lastSynced) < cacheDurationInMs) {
+      if (
+        skipSync ||
+        (lastSynced && Date.now() - Number(lastSynced) < cacheDurationInMs)
+      ) {
         logger.info('Skipping sync');
         return;
       }
