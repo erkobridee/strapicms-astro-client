@@ -88,6 +88,8 @@ export function strapiLoader({
 
       if (locales.length > 0) {
         for (const locale of locales) {
+          logger.info(`Loading the locale [ ${locale} ]`);
+
           params = {
             ...params,
             locale

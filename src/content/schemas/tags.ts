@@ -28,6 +28,8 @@ export const collection = defineCollection({
     // TODO: review
     params: { populate: '*' },
 
+    cacheDurationInMs: 60000,
+
     locales: ['en', 'pt-BR'],
 
     skipSync: isCIEnv

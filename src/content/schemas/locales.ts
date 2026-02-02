@@ -23,6 +23,8 @@ export const localeSchema = baseDocumentSchema.extend({
 const strapiLocalesLoader = (): Loader => {
   const localesUrl = new URL(`${STRAPI_BASE_URL}/i18n/locales`);
 
+  const cacheDurationInMs = 60000;
+
   return {
     name: 'locale',
     load: async ({
@@ -32,7 +34,12 @@ const strapiLocalesLoader = (): Loader => {
       generateDigest,
       parseData
     }: LoaderContext): Promise<void> => {
-      if (isCIEnv) {
+      const lastSynced = meta.get('lastSynced');
+
+      if (
+        isCIEnv ||
+        (lastSynced && Date.now() - Number(lastSynced) < cacheDurationInMs)
+      ) {
         logger.info('Skipping locales load from Strapi');
         return;
       }
@@ -53,7 +60,7 @@ const strapiLocalesLoader = (): Loader => {
         store.set({ id, digest, data });
       }
 
-      meta.set('localesLoadedAt', String(Date.now()));
+      meta.set('lastSynced', String(Date.now()));
     },
     schema: localeSchema
   };
