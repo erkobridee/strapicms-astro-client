@@ -1,25 +1,15 @@
 ---
-//import type { BlogsResponse } from '~/types/Strapi';
-
 import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
 import RenderTheCode from '~/components/RenderTheCode.astro';
 
-//import { /*STRAPI_URL,*/ strapiClient } from '~/utils/strapi/client';
-
 import { getEntries } from '~/content/utils/blogs';
+
+import { SITE_TITLE } from '~/settings';
 
 //---
 
-const title = 'Blogs | Strapi CMS Astro Client';
-
-const collectionName = 'blogs';
-
-/*
-const { data: content } = (await strapiClient
-  .collection(collectionName)
-  .find({ populate: '*' })) as BlogsResponse;
-*/
+const title = `Blogs | all data | ${SITE_TITLE}`;
 
 const content = await getEntries();
 
@@ -32,16 +22,14 @@ const code = JSON.stringify(content, null, 2);
   }}
 >
   <div class="grid h-screen place-items-center content-center space-y-4">
+    <Link href="/">Go home</Link>
+
     <h2>{title}</h2>
 
     <h3>
-      Loaded {collectionName} content ( populate = * ) [ length: {
-        content.length
-      } ]
+      Loaded content [ length: {content.length} ]
     </h3>
 
     <RenderTheCode {code} />
-
-    <Link href="/">Go home</Link>
   </div>
 </Layout>

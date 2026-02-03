@@ -1,25 +1,15 @@
 ---
-//import type { PagesResponse } from '~/types/Strapi';
-
 import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
 import RenderTheCode from '~/components/RenderTheCode.astro';
 
-//import { /*STRAPI_URL,*/ strapiClient } from '~/utils/strapi/client';
-
 import { getEntries } from '~/content/utils/pages';
+
+import { SITE_TITLE } from '~/settings';
 
 //---
 
-const title = 'Pages | Strapi CMS Astro Client';
-
-const collectionName = 'pages';
-
-/*
-const { data: content } = (await strapiClient.collection(collectionName).find({
-  populate: '*'
-})) as PagesResponse;
-*/
+const title = `Pages | all data | ${SITE_TITLE}`;
 
 const content = await getEntries();
 
@@ -32,16 +22,14 @@ const code = JSON.stringify(content, null, 2);
   }}
 >
   <div class="flex h-screen flex-col items-center justify-center gap-4 p-4">
+    <Link href="/">Go home</Link>
+
     <h2>{title}</h2>
 
     <h3>
-      Loaded {collectionName} content ( populate = * ) [ length: {
-        content.length
-      } ]
+      Loaded content [ length: {content.length} ]
     </h3>
 
     <RenderTheCode {code} />
-
-    <Link href="/">Go home</Link>
   </div>
 </Layout>
