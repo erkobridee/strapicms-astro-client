@@ -2,11 +2,13 @@
 import Layout from '~/layouts/main.astro';
 
 import Link from '~/components/Link.astro';
+
+import { SITE_TITLE as title } from '~/settings';
 ---
 
 <Layout
   content={{
-    title: 'Strapi CMS Astro Client'
+    title
   }}
 >
   <div class="grid h-screen place-items-center content-center space-y-4">
