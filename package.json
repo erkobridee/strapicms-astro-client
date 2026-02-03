@@ -21,16 +21,14 @@
     "deploy": "run-s gh-pages-build gh-pages-deploy"
   },
   "dependencies": {
-    "astro": "5.17.1",
-    "canvas-confetti": "1.9.4"
+    "astro": "5.17.1"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.6",
     "@astrojs/mdx": "4.3.13",
     "@astrojs/ts-plugin": "1.10.6",
     "@strapi/client": "1.6.0",
-    "@tailwindcss/vite": "4.1.18",
-    "@types/canvas-confetti": "1.9.0",
+    "@tailwindcss/vite": "4.1.10",
     "@types/node": "24.10.9",
     "@typescript-eslint/eslint-plugin": "8.54.0",
     "@typescript-eslint/parser": "8.54.0",
@@ -51,9 +49,10 @@
     "prettier-plugin-tailwindcss": "0.7.2",
     "simple-git-hooks": "2.13.1",
     "tailwind-merge": "3.4.0",
-    "tailwindcss": "4.1.18",
+    "tailwindcss": "4.1.10",
     "tiny-invariant": "1.3.3",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "unist-util-visit": "5.0.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,md,mdx,astro}": "prettier --write",
