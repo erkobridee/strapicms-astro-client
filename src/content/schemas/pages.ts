@@ -27,6 +27,8 @@ export const collection = defineCollection({
 
     locales,
 
+    markdownContentAttribute: 'body',
+
     skipSync: isCIEnv
   }),
 

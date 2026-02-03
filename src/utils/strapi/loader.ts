@@ -20,13 +20,14 @@ export function strapiLoader({
   cacheDurationInMs = 0,
   pageSize = 25,
   locales = [],
+  markdownContentAttribute,
   skipSync = false
 }: StrapiLoaderOptions): Loader {
   const collection = strapiClient.collection(pluralContentType);
 
   const loadData = async (
     params: StrapiLoaderOptions['params'],
-    { store, logger, generateDigest, parseData }: LoaderContext
+    { store, logger, generateDigest, parseData, renderMarkdown }: LoaderContext
   ) => {
     logger.debug(`Fetching from Strapi with params: ${JSON.stringify(params)}`);
 
@@ -54,7 +55,15 @@ export function strapiLoader({
 
         const digest = generateDigest(data);
 
-        store.set({ id, digest, data });
+        let rendered = markdownContentAttribute
+          ? document[markdownContentAttribute]
+          : undefined;
+
+        if (rendered) {
+          rendered = await renderMarkdown(rendered);
+        }
+
+        store.set({ id, digest, data, rendered });
       }
 
       invariant(

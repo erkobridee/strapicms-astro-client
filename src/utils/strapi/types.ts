@@ -41,6 +41,8 @@ export interface StrapiLoaderOptions {
    */
   locales?: string[];
 
+  markdownContentAttribute?: string;
+
   /** avoid loading the content */
   skipSync?: boolean;
 }
