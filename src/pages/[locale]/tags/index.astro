@@ -9,6 +9,12 @@ import { SITE_TITLE, locales } from '~/settings';
 
 //----------------------------------------------------------------------------//
 
+interface Tag {
+  title: string;
+  href: string;
+  count: number;
+}
+
 export async function getStaticPaths() {
   const entries = await getEntries();
 
@@ -22,9 +28,19 @@ export async function getStaticPaths() {
 
     const title = `Tags | ${locale} | ${SITE_TITLE}`;
 
+    const tags = content.map(({ data }) => {
+      const { title, slug, blogs = [] } = data;
+
+      return {
+        title,
+        href: `/${locale}/tags/${slug}`,
+        count: blogs.length
+      } as Tag;
+    });
+
     return {
       params: { locale },
-      props: { contentLength, contentAsCode, title }
+      props: { contentLength, contentAsCode, title, tags }
     };
   });
 }
@@ -36,9 +52,11 @@ interface Props {
   contentAsCode: string;
 
   title: string;
+
+  tags: Tag[];
 }
 
-const { contentLength, contentAsCode: code, title }: Props = Astro.props;
+const { contentLength, contentAsCode: code, title, tags }: Props = Astro.props;
 ---
 
 <Layout
@@ -46,10 +64,31 @@ const { contentLength, contentAsCode: code, title }: Props = Astro.props;
     title
   }}
 >
-  <div class="flex h-screen flex-col items-center justify-center gap-4 p-4">
-    <Link href="/">Go home</Link>
-
+  <div class="flex h-screen flex-col items-center gap-4 p-4">
     <h2>{title}</h2>
+
+    <div class="w-full border-b border-gray-300"></div>
+
+    <div class="flex gap-2">
+      <Link href="/">Home</Link>
+
+      <span>/</span>
+
+      <span>Tags</span>
+    </div>
+
+    <ul class="list-disc">
+      {
+        tags.map(({ title, href, count }) => (
+          <li class="flex gap-2">
+            <Link {href}>{title}</Link>
+            <span>( {count} )</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="w-full border-b border-gray-300"></div>
 
     <h3>
       Loaded content [ length: {contentLength} ]

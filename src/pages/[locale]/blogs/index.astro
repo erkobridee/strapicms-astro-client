@@ -3,14 +3,19 @@ import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
 import RenderTheCode from '~/components/RenderTheCode.astro';
 
-import { getEntries, mapByLocale } from '~/content/utils/blogs';
+import { getEntriesSorted, mapByLocale } from '~/content/utils/blogs';
 
 import { SITE_TITLE, locales } from '~/settings';
 
 //----------------------------------------------------------------------------//
 
+interface Blog {
+  title: string;
+  href: string;
+}
+
 export async function getStaticPaths() {
-  const entries = await getEntries();
+  const entries = await getEntriesSorted();
 
   const entriesByLocale = mapByLocale(entries);
 
@@ -22,9 +27,15 @@ export async function getStaticPaths() {
 
     const title = `Blogs | ${locale} | ${SITE_TITLE}`;
 
+    const blogs = content.map(({ data }) => {
+      const { title, slug } = data;
+
+      return { title, href: `/${locale}/blogs/${slug}` } as Blog;
+    });
+
     return {
       params: { locale },
-      props: { contentLength, contentAsCode, title }
+      props: { contentLength, contentAsCode, title, blogs }
     };
   });
 }
@@ -36,9 +47,11 @@ interface Props {
   contentAsCode: string;
 
   title: string;
+
+  blogs: Blog[];
 }
 
-const { contentLength, contentAsCode: code, title }: Props = Astro.props;
+const { contentLength, contentAsCode: code, title, blogs }: Props = Astro.props;
 ---
 
 <Layout
@@ -46,10 +59,30 @@ const { contentLength, contentAsCode: code, title }: Props = Astro.props;
     title
   }}
 >
-  <div class="flex h-screen flex-col items-center justify-center gap-4 p-4">
-    <Link href="/">Go home</Link>
-
+  <div class="flex h-screen flex-col items-center gap-4 p-4">
     <h2>{title}</h2>
+
+    <div class="w-full border-b border-gray-300"></div>
+
+    <div class="flex gap-2">
+      <Link href="/">Home</Link>
+
+      <span>/</span>
+
+      <span>Blogs</span>
+    </div>
+
+    <ul class="list-disc">
+      {
+        blogs.map(({ title, href }) => (
+          <li>
+            <Link {href}>{title}</Link>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="w-full border-b border-gray-300"></div>
 
     <h3>
       Loaded content [ length: {contentLength} ]
