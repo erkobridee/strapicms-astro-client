@@ -1,0 +1,162 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import { render } from 'astro:content';
+
+import Layout from '~/layouts/main.astro';
+import Link from '~/components/Link.astro';
+
+import { getEntries, mapByLocale } from '~/content/utils/pages';
+
+import { STRAPI_URL, SITE_TITLE, locales } from '~/settings';
+
+//----------------------------------------------------------------------------//
+
+type TCollectionEntry = CollectionEntry<'pages'>;
+
+interface Props {
+  pageTitle: string;
+  entry: TCollectionEntry;
+  title: string;
+  description?: string;
+  updatedAt?: string;
+  imageUrl?: string;
+  imageAltText?: string;
+}
+
+interface IStaticPathParams {
+  locale: string;
+  slug: string;
+}
+
+interface IStaticPath {
+  params: IStaticPathParams;
+  props: Props;
+}
+
+//----------------------------------------------------------------------------//
+
+export async function getStaticPaths() {
+  const allEntries = await getEntries();
+
+  const entriesByLocale = mapByLocale(allEntries);
+
+  const staticPaths: IStaticPath[] = [];
+
+  locales.forEach((locale) => {
+    const entries = entriesByLocale.get(locale) || [];
+
+    entries.forEach((entry) => {
+      const { title, slug, description, updatedAt, cover, coverAltText } =
+        entry.data;
+
+      const pageTitle = `${title} | ${locale} | ${SITE_TITLE}`;
+
+      let imageUrl: string | undefined;
+      let imageAltText: string | undefined;
+
+      if (cover) {
+        imageUrl = cover.url ? `${STRAPI_URL}${cover.url}` : undefined;
+        imageAltText = coverAltText || cover.alternativeText || cover.name;
+      }
+
+      staticPaths.push({
+        params: { locale, slug },
+        props: {
+          pageTitle,
+          entry,
+          title,
+          description,
+          updatedAt,
+          imageUrl,
+          imageAltText
+        }
+      });
+    });
+  });
+
+  return staticPaths;
+}
+
+//----------------------------------------------------------------------------//
+
+const { locale } = Astro.params;
+
+const {
+  pageTitle,
+  title,
+  entry,
+  description,
+  updatedAt,
+  imageUrl,
+  imageAltText
+} = Astro.props;
+
+const { Content } = await render(entry);
+---
+
+<Layout
+  content={{
+    title: pageTitle
+  }}
+>
+  <div class="flex h-screen flex-col items-center gap-4 p-4">
+    <h2>{pageTitle}</h2>
+
+    <div class="w-full border-b border-gray-300"></div>
+
+    <div class="flex gap-2">
+      <Link href="/">Home</Link>
+
+      <span>/</span>
+
+      <Link href={`/${locale}/pages`}>Pages</Link>
+
+      <span>/</span>
+
+      <span>{title}</span>
+    </div>
+
+    <div class="w-full border-b border-gray-300"></div>
+
+    <div class="flex gap-2">
+      <span class="font-semibold">Updated at</span>
+      <div>{updatedAt}</div>
+    </div>
+
+    {
+      description && (
+        <Fragment>
+          <div class="w-full border-b border-gray-300" />
+
+          <div class="flex flex-col gap-2">
+            <span class="font-semibold">Description</span>
+            <div>{description}</div>
+          </div>
+        </Fragment>
+      )
+    }
+
+    {
+      imageUrl && (
+        <Fragment>
+          <div class="w-full border-b border-gray-300" />
+
+          <div class="flex gap-2">
+            <span>[ {imageAltText} ]</span>
+
+            <span>{imageUrl}</span>
+          </div>
+        </Fragment>
+      )
+    }
+
+    <div class="w-full border-b border-gray-300"></div>
+
+    <div class="max-w-3xl">
+      <Content />
+    </div>
+
+    <div class="w-full border-b border-gray-300"></div>
+  </div>
+</Layout>
