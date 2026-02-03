@@ -49,7 +49,15 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 ### Astro
 
+#### Astro Assets
+
+- [Image and Assets API Reference | Astro Docs](https://docs.astro.build/en/reference/modules/astro-assets/)
+
 - [Content: Embed images in markdown without relative path | The Valley of Code](https://thevalleyofcode.com/lesson/astro-content/markdown-image-path/)
+
+- [Astro Background Caching and CDN Image Optimization | Asep Alazhari](https://asepalazhari.com/blog/astro-background-caching-cdn-image-optimization)
+
+- [Mastering Astro.js Images | Caisy](https://caisy.io/blog/astro-js-images)
 
 #### Astro Content
 
