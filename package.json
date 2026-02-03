@@ -21,7 +21,7 @@
     "deploy": "run-s gh-pages-build gh-pages-deploy"
   },
   "dependencies": {
-    "astro": "5.16.16",
+    "astro": "5.17.1",
     "canvas-confetti": "1.9.4"
   },
   "devDependencies": {
