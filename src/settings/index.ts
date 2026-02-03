@@ -1,3 +1,10 @@
+export const STRAPI_IMAGE_REMOTE_PATTERN = {
+  protocol: 'http',
+  hostname: 'localhost',
+  port: '1337',
+  pathname: '/uploads/**'
+};
+
 export const STRAPI_URL = 'http://localhost:1337';
 
 export const STRAPI_API_URL = `${STRAPI_URL}/api`;

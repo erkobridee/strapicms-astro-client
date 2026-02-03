@@ -6,7 +6,7 @@ import mdx from '@astrojs/mdx';
 // https://tailwindcss.com/docs/installation/framework-guides/astro
 import tailwindcss from '@tailwindcss/vite';
 
-import { i18nConfig } from './src/settings';
+import { STRAPI_IMAGE_REMOTE_PATTERN, i18nConfig } from './src/settings';
 
 //----------------------------------------------------------------------------//
 
@@ -25,6 +25,10 @@ const baseConfig = {
   i18n: i18nConfig,
 
   integrations: [mdx()],
+
+  image: {
+    remotePatterns: [STRAPI_IMAGE_REMOTE_PATTERN]
+  },
 
   vite: {
     plugins: [tailwindcss()]

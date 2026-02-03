@@ -3,6 +3,9 @@ import type { CollectionEntry } from 'astro:content';
 
 import { render } from 'astro:content';
 
+// https://docs.astro.build/en/guides/images/
+import { Image } from 'astro:assets';
+
 import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
 
@@ -141,6 +144,13 @@ const { Content } = await render(entry);
       imageUrl && (
         <Fragment>
           <div class="w-full border-b border-gray-300" />
+
+          <Image
+            src={imageUrl}
+            alt={imageAltText}
+            class="h-48 w-full object-cover"
+            inferSize
+          />
 
           <div class="flex gap-2">
             <span>[ {imageAltText} ]</span>
