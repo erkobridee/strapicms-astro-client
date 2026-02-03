@@ -47,7 +47,11 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 - [astro download headless cms images on build | Perplexity.ai](https://www.perplexity.ai/search/astro-download-headless-cms-im-fDKc3oryT9WVax82bPST.w)
 
-### Astro Content
+### Astro
+
+- [Content: Embed images in markdown without relative path | The Valley of Code](https://thevalleyofcode.com/lesson/astro-content/markdown-image-path/)
+
+#### Astro Content
 
 - [Content Layer: A Deep Dive | Astro Blog](https://astro.build/blog/content-layer-deep-dive/)
 
