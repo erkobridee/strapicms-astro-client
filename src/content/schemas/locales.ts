@@ -6,7 +6,8 @@ import { defineCollection, z } from 'astro:content';
 import { baseDocumentSchema } from './strapi';
 
 import { isCIEnv } from '~/utils/env';
-import { STRAPI_BASE_URL } from '~/utils/strapi/client';
+
+import { STRAPI_API_URL, astroCollectionCacheDurationInMs } from '~/settings';
 
 //----------------------------------------------------------------------------//
 
@@ -21,9 +22,7 @@ export const localeSchema = baseDocumentSchema.extend({
 // https://docs.astro.build/en/reference/content-loader-reference/#loader-types
 
 const strapiLocalesLoader = (): Loader => {
-  const localesUrl = new URL(`${STRAPI_BASE_URL}/i18n/locales`);
-
-  const cacheDurationInMs = 60000;
+  const localesUrl = new URL(`${STRAPI_API_URL}/i18n/locales`);
 
   return {
     name: 'locale',
@@ -38,7 +37,8 @@ const strapiLocalesLoader = (): Loader => {
 
       if (
         isCIEnv ||
-        (lastSynced && Date.now() - Number(lastSynced) < cacheDurationInMs)
+        (lastSynced &&
+          Date.now() - Number(lastSynced) < astroCollectionCacheDurationInMs)
       ) {
         logger.info('Skipping locales load from Strapi');
         return;
@@ -62,6 +62,7 @@ const strapiLocalesLoader = (): Loader => {
 
       meta.set('lastSynced', String(Date.now()));
     },
+
     schema: localeSchema
   };
 };

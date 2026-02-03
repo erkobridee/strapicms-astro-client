@@ -1,28 +1,14 @@
 import { defineCollection, z } from 'astro:content';
 
-import { baseDocumentSchema, imageSchema } from './strapi';
+import { basePageSchema } from './strapi';
 
 import strapiLoader from '~/utils/strapi/loader';
 
 import { isCIEnv } from '~/utils/env';
 
-import { locales, cacheDurationInMs } from '~/settings';
+import { locales, astroCollectionCacheDurationInMs } from '~/settings';
 
 //----------------------------------------------------------------------------//
-
-const basePageSchema = baseDocumentSchema.extend({
-  title: z.string(),
-  slug: z.string(),
-
-  description: z.string().optional().nullable(),
-
-  body: z.string(),
-
-  cover: imageSchema.optional().nullable(),
-  coverAltText: z.string().optional().nullable(),
-
-  locale: z.string()
-});
 
 export const pageSchema = basePageSchema.extend({
   localizations: z.array(basePageSchema).optional()
@@ -37,11 +23,12 @@ export const collection = defineCollection({
     // TODO: review
     params: { populate: '*' },
 
-    cacheDurationInMs,
+    cacheDurationInMs: astroCollectionCacheDurationInMs,
 
     locales,
 
     skipSync: isCIEnv
   }),
+
   schema: pageSchema
 });

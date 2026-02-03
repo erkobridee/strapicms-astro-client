@@ -1,24 +1,19 @@
 import { defineCollection, z } from 'astro:content';
 
-import { baseDocumentSchema } from './strapi';
+import { baseBlogSchema, baseTagSchema } from './strapi';
 
 import strapiLoader from '~/utils/strapi/loader';
 
 import { isCIEnv } from '~/utils/env';
 
-import { locales, cacheDurationInMs } from '~/settings';
+import { locales, astroCollectionCacheDurationInMs } from '~/settings';
 
 //----------------------------------------------------------------------------//
 
-const baseTagSchema = baseDocumentSchema.extend({
-  title: z.string(),
-  slug: z.string(),
-  description: z.string().optional().nullable(),
-  locale: z.string()
-});
-
 export const tagSchema = baseTagSchema.extend({
-  localizations: z.array(baseTagSchema).optional()
+  localizations: z.array(baseTagSchema).optional(),
+
+  blogs: z.array(baseBlogSchema).optional()
 });
 
 //----------------------------------------------------------------------------//
@@ -30,11 +25,12 @@ export const collection = defineCollection({
     // TODO: review
     params: { populate: '*' },
 
-    cacheDurationInMs,
+    cacheDurationInMs: astroCollectionCacheDurationInMs,
 
     locales,
 
     skipSync: isCIEnv
   }),
+
   schema: tagSchema
 });

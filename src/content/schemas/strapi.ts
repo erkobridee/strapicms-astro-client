@@ -48,3 +48,42 @@ export const localeSchema = baseDocumentSchema.extend({
   code: z.string(),
   isDefault: z.boolean()
 });
+
+//----------------------------------------------------------------------------//
+
+export const basePageSchema = baseDocumentSchema.extend({
+  title: z.string(),
+  slug: z.string(),
+
+  description: z.string().optional().nullable(),
+
+  body: z.string(),
+
+  cover: imageSchema.optional().nullable(),
+  coverAltText: z.string().optional().nullable(),
+
+  locale: z.string()
+});
+
+export const baseTagSchema = baseDocumentSchema.extend({
+  title: z.string(),
+  slug: z.string(),
+
+  description: z.string().optional().nullable(),
+
+  locale: z.string()
+});
+
+export const baseBlogSchema = baseDocumentSchema.extend({
+  title: z.string(),
+  slug: z.string(),
+
+  description: z.string().optional().nullable(),
+
+  body: z.string(),
+
+  cover: imageSchema.optional().nullable(),
+  coverAltText: z.string().optional().nullable(),
+
+  locale: z.string()
+});
