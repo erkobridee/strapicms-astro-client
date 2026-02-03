@@ -55,5 +55,7 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
   - [Defining the collection loader](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-loader)
 
 - [Content Collections API Reference | Astro Docs](https://docs.astro.build/en/reference/modules/astro-content/)
+  - [Rendering body content](https://docs.astro.build/en/guides/content-collections/#rendering-body-content)
 
 - [Astro Content Loader API | Astro Docs](https://docs.astro.build/en/reference/content-loader-reference/)
+  - [renderMarkdown](https://docs.astro.build/en/reference/content-loader-reference/#rendermarkdown)
