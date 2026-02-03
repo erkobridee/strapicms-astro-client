@@ -10,7 +10,6 @@ import { SITE_TITLE, locales } from '~/settings';
 //----------------------------------------------------------------------------//
 
 interface Page {
-  id: string;
   title: string;
   href: string;
 }
@@ -29,9 +28,9 @@ export async function getStaticPaths() {
     const title = `Pages | ${locale} | ${SITE_TITLE}`;
 
     const pages = content.map(({ data }) => {
-      const { documentId: id, title, slug } = data;
+      const { title, slug } = data;
 
-      return { id, title, href: `/${locale}/pages/${slug}` } as Page;
+      return { title, href: `/${locale}/pages/${slug}` } as Page;
     });
 
     return {
