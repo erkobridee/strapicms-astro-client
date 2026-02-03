@@ -1,4 +1,14 @@
-export const cacheDurationInMs = 60000;
+export const STRAPI_URL = 'http://localhost:1337';
+
+export const STRAPI_API_URL = `${STRAPI_URL}/api`;
+
+//----------------------------------------------------------------------------//
+
+export const SITE_TITLE = 'Strapi CMS Astro Client';
+
+//----------------------------------------------------------------------------//
+
+export const astroCollectionCacheDurationInMs = 60000;
 
 //----------------------------------------------------------------------------//
 
