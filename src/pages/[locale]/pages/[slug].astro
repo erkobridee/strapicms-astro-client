@@ -8,6 +8,7 @@ import { Image } from 'astro:assets';
 
 import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
+import RenderTheCode from '~/components/RenderTheCode.astro';
 
 import { getEntries, mapByLocale } from '~/content/utils/pages';
 
@@ -163,10 +164,16 @@ const { Content } = await render(entry);
 
     <div class="w-full border-b border-gray-300"></div>
 
+    <h3 class="font-semibold">Body</h3>
+
     <div class="max-w-3xl">
       <Content />
     </div>
 
     <div class="w-full border-b border-gray-300"></div>
+
+    <h3 class="font-semibold">Loaded content</h3>
+
+    <RenderTheCode code={JSON.stringify(entry, null, 2)} />
   </div>
 </Layout>
