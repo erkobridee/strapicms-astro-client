@@ -61,6 +61,10 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 - [how to download and optimize the markdown images from a headless cms on astro | Perplexity.ai](https://www.perplexity.ai/search/how-to-download-and-optimize-t-3TpcbuT4QyaEaZjAUGpkaw)
 
+- [How to use optimized images in Astro | Fogbender](https://fogbender.com/blog/optimize-images-in-astro-with-assets-integration/)
+
+- [Preloading images with Astro | Alex Nguyen - Web Developer](https://alexnguyen.co.nz/blog/preloading-images-with-astro/)
+
 #### Astro Content
 
 - [Content Layer: A Deep Dive | Astro Blog](https://astro.build/blog/content-layer-deep-dive/)
