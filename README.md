@@ -59,6 +59,8 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 - [Mastering Astro.js Images | Caisy](https://caisy.io/blog/astro-js-images)
 
+- [how to download and optimize the markdown images from a headless cms on astro | Perplexity.ai](https://www.perplexity.ai/search/how-to-download-and-optimize-t-3TpcbuT4QyaEaZjAUGpkaw)
+
 #### Astro Content
 
 - [Content Layer: A Deep Dive | Astro Blog](https://astro.build/blog/content-layer-deep-dive/)
