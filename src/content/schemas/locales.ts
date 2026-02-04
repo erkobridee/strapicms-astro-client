@@ -40,11 +40,11 @@ const strapiLocalesLoader = (): Loader => {
         (lastSynced &&
           Date.now() - Number(lastSynced) < astroCollectionCacheDurationInMs)
       ) {
-        logger.info('Skipping locales load from Strapi');
+        logger.info('Skipping sync');
         return;
       }
 
-      logger.debug('Fetching from locales Strapi');
+      logger.info(`Load locales from Strapi: START`);
 
       const response = await fetch(localesUrl);
 
@@ -59,6 +59,8 @@ const strapiLocalesLoader = (): Loader => {
 
         store.set({ id, digest, data });
       }
+
+      logger.info(`Load locales from Strapi: DONE`);
 
       meta.set('lastSynced', String(Date.now()));
     },
