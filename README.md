@@ -65,6 +65,9 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 - [Preloading images with Astro | Alex Nguyen - Web Developer](https://alexnguyen.co.nz/blog/preloading-images-with-astro/)
 
+- [Cache Astro images across GitHub Action runs | Daniel Farquhar-Wulff’s blog](https://danielwulff.dev/blog/cache-astro-images-across-github-action-runs/)
+  - [[GitHub] danwulff/astro-image-cache](https://github.com/danwulff/astro-image-cache) - Example of how to cache images between github action runs for astro projects
+
 #### Astro Content
 
 - [Content Layer: A Deep Dive | Astro Blog](https://astro.build/blog/content-layer-deep-dive/)
