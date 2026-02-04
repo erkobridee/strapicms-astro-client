@@ -73,7 +73,7 @@ export function strapiLoader({
 
       totalPageCount = pagination.pageCount;
 
-      logger.info(`Stored page ${currentPageNum} of ${totalPageCount}.`);
+      logger.debug(`Stored page ${currentPageNum} of ${totalPageCount}.`);
 
       currentPageNum++;
     } while (currentPageNum <= totalPageCount);
@@ -95,6 +95,8 @@ export function strapiLoader({
         return;
       }
 
+      logger.info(`Load ${pluralContentType} from Strapi: START`);
+
       if (locales.length > 0) {
         for (const locale of locales) {
           logger.info(`Loading the locale [ ${locale} ]`);
@@ -108,6 +110,8 @@ export function strapiLoader({
       } else {
         await loadData(params, context);
       }
+
+      logger.info(`Load ${pluralContentType} from Strapi: DONE`);
 
       meta.set('lastSynced', String(Date.now()));
     },
