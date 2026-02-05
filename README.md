@@ -103,3 +103,21 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
   - `astro-remote - RemoteHTML` ( [line 240](https://github.com/erkobridee/strapicms-astro-client/blob/8b3c0e5731f783c26dda286ec2b26958853dedaf/src/pages/%5Blocale%5D/blogs/%5Bslug%5D.astro#L240C8-L240C18) )
     - [RemoteHTML](https://github.com/erkobridee/strapicms-astro-client/blob/8b3c0e5731f783c26dda286ec2b26958853dedaf/src/components/RemoteHTML/component.astro)
       - [HTMLImage](https://github.com/erkobridee/strapicms-astro-client/blob/8b3c0e5731f783c26dda286ec2b26958853dedaf/src/components/RemoteHTML/HTMLImage.astro)
+
+**Suggested Solution:** at the Astro code base, update the code of `content-layer` ( `createMarkdownProcessor` [line 143](https://github.com/withastro/astro/blob/astro%405.17.1/packages/astro/src/content/content-layer.ts#L143) ) to something like the following
+
+```js
+async #processMarkdown(content: string): Promise<RenderedContent> {
+  const config = this.#settings.config;
+  this.#markdownProcessor ??= await createMarkdownProcessor({
+    image: config.image,
+    experimentalHeadingIdCompat: config.experimental.headingIdCompat,
+    ...config.markdown
+  });
+  const { code, metadata } = await this.#markdownProcessor.render(content);
+  return {
+    html: code,
+    metadata,
+  };
+}
+```
