@@ -80,9 +80,11 @@ const { contentLength, contentAsCode: code, title, tags }: Props = Astro.props;
     <ul class="list-disc">
       {
         tags.map(({ title, href, count }) => (
-          <li class="flex gap-2">
-            <Link {href}>{title}</Link>
-            <span>( {count} )</span>
+          <li>
+            <div class="flex gap-2">
+              <Link {href}>{title}</Link>
+              <span>( {count} )</span>
+            </div>
           </li>
         ))
       }

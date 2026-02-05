@@ -1,0 +1,175 @@
+---
+import type { TCollectionEntry } from '~/content/utils/tags';
+
+import Layout from '~/layouts/main.astro';
+import Link from '~/components/Link.astro';
+import RenderTheCode from '~/components/RenderTheCode.astro';
+
+import { getEntries, mapByLocale } from '~/content/utils/tags';
+
+import { SITE_TITLE, locales } from '~/settings';
+
+//----------------------------------------------------------------------------//
+
+interface Blog {
+  title: string;
+  href: string;
+  updatedAt?: string;
+}
+
+interface Props {
+  pageTitle: string;
+
+  title: string;
+  description?: string;
+  updatedAt?: string;
+
+  blogs: Blog[];
+
+  entry: TCollectionEntry;
+}
+
+interface IStaticPathParams {
+  locale: string;
+  slug: string;
+}
+
+interface IStaticPath {
+  params: IStaticPathParams;
+  props: Props;
+}
+
+//----------------------------------------------------------------------------//
+
+export async function getStaticPaths() {
+  const allEntries = await getEntries();
+
+  const entriesByLocale = mapByLocale(allEntries);
+
+  const staticPaths: IStaticPath[] = [];
+
+  locales.forEach((locale) => {
+    const entries = entriesByLocale.get(locale) || [];
+
+    entries.forEach((entry) => {
+      const {
+        title,
+        slug,
+        description,
+        updatedAt,
+        blogs: blogsRaw
+      } = entry.data;
+
+      const pageTitle = `${title} | ${locale} | ${SITE_TITLE}`;
+
+      const blogs = blogsRaw.map(({ title, slug, updatedAt }) => {
+        const href = `/${locale}/blogs/${slug}`;
+
+        return {
+          title,
+          href,
+          updatedAt
+        } as Blog;
+      });
+
+      staticPaths.push({
+        params: { locale, slug },
+        props: {
+          pageTitle,
+          title,
+          description,
+          updatedAt,
+
+          blogs,
+
+          entry
+        }
+      });
+    });
+  });
+
+  return staticPaths;
+}
+
+//----------------------------------------------------------------------------//
+
+const { locale } = Astro.params;
+
+const {
+  pageTitle,
+  title,
+  description,
+  updatedAt,
+
+  blogs,
+
+  entry
+} = Astro.props;
+---
+
+<Layout
+  content={{
+    title: pageTitle
+  }}
+>
+  <div class="flex h-screen flex-col items-center gap-4 p-4">
+    <h2>{pageTitle}</h2>
+
+    <div class="w-full border-b border-gray-300"></div>
+
+    <div class="flex gap-2">
+      <Link href="/">Home</Link>
+
+      <span>/</span>
+
+      <Link href={`/${locale}/tags`}>Tags</Link>
+
+      <span>/</span>
+
+      <span>{title}</span>
+    </div>
+
+    <div class="w-full border-b border-gray-300"></div>
+
+    <div class="flex gap-2">
+      <span class="font-semibold">Updated at</span>
+      <div>{updatedAt}</div>
+    </div>
+
+    {
+      description && (
+        <Fragment>
+          <div class="w-full border-b border-gray-300" />
+
+          <div class="flex flex-col gap-2">
+            <span class="font-semibold">Description</span>
+            <div>{description}</div>
+          </div>
+        </Fragment>
+      )
+    }
+
+    <div class="w-full border-b border-gray-300"></div>
+
+    <ul class="list-disc">
+      {
+        blogs.map(({ title, href, updatedAt }) => (
+          <li>
+            <div class="flex gap-2">
+              <Link {href}>{title}</Link>
+              <span>( {updatedAt} )</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="w-full border-b border-gray-300"></div>
+
+    <h3 class="font-semibold">Loaded content</h3>
+
+    <RenderTheCode code={JSON.stringify(entry, null, 2)} />
+
+    <div>&nbsp;</div>
+  </div>
+</Layout>
