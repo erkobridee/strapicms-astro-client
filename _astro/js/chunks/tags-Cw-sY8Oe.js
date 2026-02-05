@@ -1,6 +1,6 @@
-import { i as isCIEnv, g as getCollection } from './env-B3kFSSG3.js';
+import { i as isCIEnv, g as getCollection } from './env-CBdDm6uf.js';
 
-const getEntries = async () => isCIEnv ? [] : await getCollection("pages");
+const getEntries = async () => isCIEnv ? [] : await getCollection("tags");
 const mapByLocale = (entries) => entries.reduce((acc, entry) => {
   const locale = entry.data.locale;
   if (acc.has(locale)) {
