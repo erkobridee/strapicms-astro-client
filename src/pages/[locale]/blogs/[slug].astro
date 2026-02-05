@@ -3,12 +3,16 @@ import type { CollectionEntry } from 'astro:content';
 
 import { render } from 'astro:content';
 
+import { Markdown } from 'astro-remote';
+
 // https://docs.astro.build/en/guides/images/
 import { Image } from 'astro:assets';
 
 import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
 import RenderTheCode from '~/components/RenderTheCode.astro';
+
+import RemoteMarkdownImage from '~/components/RemoteMarkdownImage.astro';
 
 import { getEntries, mapByLocale } from '~/content/utils/blogs';
 
@@ -117,6 +121,8 @@ const {
 } = Astro.props;
 
 const { Content } = await render(entry);
+
+const { body } = entry.data;
 ---
 
 <Layout
@@ -208,5 +214,13 @@ const { Content } = await render(entry);
     <h3 class="font-semibold">Loaded content</h3>
 
     <RenderTheCode code={JSON.stringify(entry, null, 2)} />
+
+    <div class="w-full border-b border-gray-300"></div>
+
+    <h3 class="font-semibold">astro-remote</h3>
+
+    <div class="max-w-3xl">
+      <Markdown content={body} components={{ img: RemoteMarkdownImage }} />
+    </div>
   </div>
 </Layout>
