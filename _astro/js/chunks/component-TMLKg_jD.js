@@ -2,7 +2,7 @@ import { b as createAstro, c as createComponent, m as maybeRenderHead, d as addA
 import 'piccolore';
 import 'clsx';
 import { c as cn, b as STRAPI_URL } from './index-wSZY7w-1.js';
-import { $ as $$Image } from './_astro_assets-BT7PBMak.js';
+import { $ as $$Image } from './_astro_assets-BKaFqyhn.js';
 import { transform, __unsafeHTML } from 'ultrahtml';
 import sanitize from 'ultrahtml/transformers/sanitize';
 import swap from 'ultrahtml/transformers/swap';
