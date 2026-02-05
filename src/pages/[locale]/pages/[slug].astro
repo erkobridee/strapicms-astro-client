@@ -1,7 +1,5 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-
-import { render } from 'astro:content';
+import type { TCollectionEntry } from '~/content/utils/pages';
 
 // https://docs.astro.build/en/guides/images/
 import { Image } from 'astro:assets';
@@ -9,6 +7,7 @@ import { Image } from 'astro:assets';
 import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
 import RenderTheCode from '~/components/RenderTheCode.astro';
+import RemoteMarkdown from '~/components/RemoteMarkdown';
 
 import { getEntries, mapByLocale } from '~/content/utils/pages';
 
@@ -16,16 +15,16 @@ import { STRAPI_URL, SITE_TITLE, locales } from '~/settings';
 
 //----------------------------------------------------------------------------//
 
-type TCollectionEntry = CollectionEntry<'pages'>;
-
 interface Props {
   pageTitle: string;
-  entry: TCollectionEntry;
   title: string;
   description?: string;
+  body: string;
   updatedAt?: string;
   imageUrl?: string;
   imageAltText?: string;
+
+  entry: TCollectionEntry;
 }
 
 interface IStaticPathParams {
@@ -51,7 +50,7 @@ export async function getStaticPaths() {
     const entries = entriesByLocale.get(locale) || [];
 
     entries.forEach((entry) => {
-      const { title, slug, description, updatedAt, cover, coverAltText } =
+      const { title, slug, description, body, updatedAt, cover, coverAltText } =
         entry.data;
 
       const pageTitle = `${title} | ${locale} | ${SITE_TITLE}`;
@@ -68,12 +67,14 @@ export async function getStaticPaths() {
         params: { locale, slug },
         props: {
           pageTitle,
-          entry,
           title,
           description,
+          body,
           updatedAt,
           imageUrl,
-          imageAltText
+          imageAltText,
+
+          entry
         }
       });
     });
@@ -89,14 +90,14 @@ const { locale } = Astro.params;
 const {
   pageTitle,
   title,
-  entry,
   description,
+  body,
   updatedAt,
   imageUrl,
-  imageAltText
-} = Astro.props;
+  imageAltText,
 
-const { Content } = await render(entry);
+  entry
+} = Astro.props;
 ---
 
 <Layout
@@ -167,7 +168,7 @@ const { Content } = await render(entry);
     <h3 class="font-semibold">Body</h3>
 
     <div class="max-w-3xl">
-      <Content />
+      <RemoteMarkdown content={body} />
     </div>
 
     <div class="w-full border-b border-gray-300"></div>
@@ -175,5 +176,7 @@ const { Content } = await render(entry);
     <h3 class="font-semibold">Loaded content</h3>
 
     <RenderTheCode code={JSON.stringify(entry, null, 2)} />
+
+    <div>&nbsp;</div>
   </div>
 </Layout>
