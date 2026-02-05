@@ -9,6 +9,7 @@ import { render } from 'astro:content';
 import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
 import RenderTheCode from '~/components/RenderTheCode.astro';
+import TailwindTypographyProse from '~/components/TailwindTypographyProse.astro';
 import RemoteMarkdown from '~/components/RemoteMarkdown';
 import RemoteHTML from '~/components/RemoteHTML';
 
@@ -179,9 +180,9 @@ const { Content } = await render(entry);
     <h3 class="font-semibold">astro:content</h3>
     <h4 class="italic">{`const { Content } = await render(entry);`}</h4>
 
-    <div class="max-w-3xl">
+    <TailwindTypographyProse class="max-w-4xl">
       <Content />
-    </div>
+    </TailwindTypographyProse>
 
     <div class="w-full border-b border-gray-300"></div>
 
@@ -190,9 +191,9 @@ const { Content } = await render(entry);
     <h3 class="font-semibold">astro-remote - Markdown</h3>
     <h4 class="italic">entry.data.body</h4>
 
-    <div class="max-w-3xl">
+    <TailwindTypographyProse class="max-w-4xl">
       <RemoteMarkdown content={body} />
-    </div>
+    </TailwindTypographyProse>
 
     <div class="w-full border-b border-gray-300"></div>
 
@@ -201,9 +202,9 @@ const { Content } = await render(entry);
     <h3 class="font-semibold">astro-remote - Markup</h3>
     <h4 class="italic">entry.rendered.html</h4>
 
-    <div class="max-w-3xl">
+    <TailwindTypographyProse class="max-w-4xl">
       <RemoteHTML content={entry?.rendered?.html || ''} />
-    </div>
+    </TailwindTypographyProse>
 
     <div>&nbsp;</div>
   </div>
