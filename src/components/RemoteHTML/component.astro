@@ -1,0 +1,15 @@
+---
+import { Markup } from 'astro-remote';
+
+import HTMLImage from './HTMLImage.astro';
+
+//----------------------------------------------------------------------------//
+
+interface Props {
+  content: string;
+}
+
+const { content } = Astro.props;
+---
+
+<Markup {content} components={{ img: HTMLImage }} />

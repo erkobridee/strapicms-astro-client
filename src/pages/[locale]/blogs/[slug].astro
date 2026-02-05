@@ -8,6 +8,7 @@ import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
 import RenderTheCode from '~/components/RenderTheCode.astro';
 import RemoteMarkdown from '~/components/RemoteMarkdown';
+import RemoteHTML from '~/components/RemoteHTML';
 
 import { getEntries, mapByLocale } from '~/content/utils/blogs';
 
@@ -199,7 +200,14 @@ const {
 
     <div class="w-full border-b border-gray-300"></div>
 
-    <h3 class="font-semibold">Body</h3>
+    <h3 class="font-semibold">Loaded content</h3>
+
+    <RenderTheCode code={JSON.stringify(entry, null, 2)} />
+
+    <div class="w-full border-b border-gray-300"></div>
+
+    <h3 class="font-semibold">astro-remote - Markdown</h3>
+    <h4 class="italic">entry.data.body</h4>
 
     <div class="max-w-3xl">
       <RemoteMarkdown content={body} />
@@ -207,9 +215,14 @@ const {
 
     <div class="w-full border-b border-gray-300"></div>
 
-    <h3 class="font-semibold">Loaded content</h3>
+    <div class="w-full border-b border-gray-300"></div>
 
-    <RenderTheCode code={JSON.stringify(entry, null, 2)} />
+    <h3 class="font-semibold">astro-remote - Markup</h3>
+    <h4 class="italic">entry.rendered.html</h4>
+
+    <div class="max-w-3xl">
+      <RemoteHTML content={entry?.rendered?.html || ''} />
+    </div>
 
     <div>&nbsp;</div>
   </div>

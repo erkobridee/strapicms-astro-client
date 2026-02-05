@@ -1,0 +1,15 @@
+---
+// https://docs.astro.build/en/guides/images/
+import { Image } from 'astro:assets';
+
+//----------------------------------------------------------------------------//
+
+interface Props {
+  src: string;
+  alt: string;
+}
+
+const { src, alt } = Astro.props;
+---
+
+<Image {src} {alt} inferSize />
