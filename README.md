@@ -83,7 +83,7 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 #### Astro known issue
 
-- [Missing support for remote image configuration a the content-layer · Issue #15417 · withastro/astro](https://github.com/withastro/astro/issues/15417)
+- [Missing support for remote image configuration at the content-layer · Issue #15417 · withastro/astro](https://github.com/withastro/astro/issues/15417)
 
 **Astro version:** `v5.17.x`
 
