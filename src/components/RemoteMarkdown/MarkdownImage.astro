@@ -1,0 +1,24 @@
+---
+// https://docs.astro.build/en/guides/images/
+import { Image } from 'astro:assets';
+
+import { STRAPI_URL } from '~/settings';
+
+//----------------------------------------------------------------------------//
+
+interface Props {
+  src: string;
+  alt: string;
+}
+
+const UPLOADS_PREFIX = '/uploads/';
+const STRAPI_UPLOADS_PREFIX = `${STRAPI_URL}${UPLOADS_PREFIX}`;
+
+const { src: initialSrc, alt } = Astro.props;
+
+const src = initialSrc.startsWith(UPLOADS_PREFIX)
+  ? initialSrc.replace(UPLOADS_PREFIX, STRAPI_UPLOADS_PREFIX)
+  : initialSrc;
+---
+
+<Image {src} {alt} inferSize />

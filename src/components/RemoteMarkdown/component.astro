@@ -1,0 +1,15 @@
+---
+import { Markdown } from 'astro-remote';
+
+import MarkdownImage from './MarkdownImage.astro';
+
+//----------------------------------------------------------------------------//
+
+interface Props {
+  content: string;
+}
+
+const { content } = Astro.props;
+---
+
+<Markdown {content} components={{ img: MarkdownImage }} />

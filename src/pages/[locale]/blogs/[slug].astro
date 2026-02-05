@@ -1,9 +1,5 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-
-import { render } from 'astro:content';
-
-import { Markdown } from 'astro-remote';
+import type { TCollectionEntry } from '~/content/utils/blogs';
 
 // https://docs.astro.build/en/guides/images/
 import { Image } from 'astro:assets';
@@ -12,15 +8,13 @@ import Layout from '~/layouts/main.astro';
 import Link from '~/components/Link.astro';
 import RenderTheCode from '~/components/RenderTheCode.astro';
 
-import RemoteMarkdownImage from '~/components/RemoteMarkdownImage.astro';
+import RemoteMarkdown from '~/components/RemoteMarkdown';
 
 import { getEntries, mapByLocale } from '~/content/utils/blogs';
 
 import { STRAPI_URL, SITE_TITLE, locales } from '~/settings';
 
 //----------------------------------------------------------------------------//
-
-type TCollectionEntry = CollectionEntry<'blogs'>;
 
 interface Tag {
   title: string;
@@ -29,13 +23,15 @@ interface Tag {
 
 interface Props {
   pageTitle: string;
-  entry: TCollectionEntry;
   title: string;
   description?: string;
+  body: string;
   updatedAt?: string;
   imageUrl?: string;
   imageAltText?: string;
   tags?: Tag[];
+
+  entry: TCollectionEntry;
 }
 
 interface IStaticPathParams {
@@ -65,6 +61,7 @@ export async function getStaticPaths() {
         title,
         slug,
         description,
+        body,
         updatedAt,
         cover,
         coverAltText,
@@ -90,13 +87,15 @@ export async function getStaticPaths() {
         params: { locale, slug },
         props: {
           pageTitle,
-          entry,
           title,
           description,
+          body,
           updatedAt,
           imageUrl,
           imageAltText,
-          tags
+          tags,
+
+          entry
         }
       });
     });
@@ -112,17 +111,15 @@ const { locale } = Astro.params;
 const {
   pageTitle,
   title,
-  entry,
   description,
+  body,
   updatedAt,
   imageUrl,
   imageAltText,
-  tags = []
+  tags = [],
+
+  entry
 } = Astro.props;
-
-const { Content } = await render(entry);
-
-const { body } = entry.data;
 ---
 
 <Layout
@@ -130,7 +127,7 @@ const { body } = entry.data;
     title: pageTitle
   }}
 >
-  <div class="flex h-screen flex-col items-center gap-4 p-4">
+  <div class="flex h-screen flex-col items-center gap-4 p-4 pb-10">
     <h2>{pageTitle}</h2>
 
     <div class="w-full border-b border-gray-300"></div>
@@ -206,7 +203,7 @@ const { body } = entry.data;
     <h3 class="font-semibold">Body</h3>
 
     <div class="max-w-3xl">
-      <Content />
+      <RemoteMarkdown content={body} />
     </div>
 
     <div class="w-full border-b border-gray-300"></div>
@@ -215,12 +212,6 @@ const { body } = entry.data;
 
     <RenderTheCode code={JSON.stringify(entry, null, 2)} />
 
-    <div class="w-full border-b border-gray-300"></div>
-
-    <h3 class="font-semibold">astro-remote</h3>
-
-    <div class="max-w-3xl">
-      <Markdown content={body} components={{ img: RemoteMarkdownImage }} />
-    </div>
+    <div>&nbsp;</div>
   </div>
 </Layout>
