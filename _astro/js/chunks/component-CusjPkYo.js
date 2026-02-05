@@ -1,7 +1,8 @@
-import { d as renderJSX, e as createVNode, b as createAstro, c as createComponent, r as renderComponent, F as Fragment, a as renderTemplate, u as unescapeHTML } from './astro/server-Cn_tEFAQ.js';
+import { b as createAstro, c as createComponent, m as maybeRenderHead, d as addAttribute, e as renderSlot, a as renderTemplate, f as renderJSX, g as createVNode, r as renderComponent, F as Fragment, u as unescapeHTML } from './astro/server-D0T6fP_R.js';
 import 'piccolore';
-import { $ as $$Image } from './_astro_assets-CsZcp26x.js';
-import { b as STRAPI_URL } from './index-D4kDYRbx.js';
+import 'clsx';
+import { c as cn, b as STRAPI_URL } from './index-B537Rb-c.js';
+import { $ as $$Image } from './_astro_assets-BMDZGQsi.js';
 import { transform, __unsafeHTML } from 'ultrahtml';
 import sanitize from 'ultrahtml/transformers/sanitize';
 import swap from 'ultrahtml/transformers/swap';
@@ -9,6 +10,14 @@ import { Marked } from 'marked';
 import markedFootnote from 'marked-footnote';
 import { markedSmartypants } from 'marked-smartypants';
 import * as entities from 'entities';
+
+const $$Astro$6 = createAstro("https://erkobridee.github.io");
+const $$TailwindTypographyProse = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$6, $$props, $$slots);
+  Astro2.self = $$TailwindTypographyProse;
+  const { class: className } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<div${addAttribute(cn("prose max-w-[90vw]", className), "class")}> ${renderSlot($$result, $$slots["default"])} </div>`;
+}, "/home/x-bridee.e/dev_personal/strapicms-astro-client/src/components/TailwindTypographyProse.astro", void 0);
 
 function createComponentProxy(result, _components = {}) {
   const components = {};
@@ -157,4 +166,4 @@ const $$Component = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${renderComponent($$result, "Markup", $$Markup, { "content": content, "components": { img: $$HTMLImage } })}`;
 }, "/home/x-bridee.e/dev_personal/strapicms-astro-client/src/components/RemoteHTML/component.astro", void 0);
 
-export { $$Component$1 as $, $$Component as a };
+export { $$TailwindTypographyProse as $, $$Component$1 as a, $$Component as b };
