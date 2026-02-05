@@ -1,6 +1,6 @@
 import type { AstroUserConfig } from 'astro';
 import type { RemarkPlugin } from '@astrojs/markdown-remark';
-import type { Node, Data } from 'unist';
+import type { Node } from 'unist';
 import type { Visitor } from 'unist-util-visit';
 
 // https://docs.astro.build/en/reference/configuration-reference/
@@ -35,75 +35,14 @@ const isGitHubPagesPreview = !!process.env.GITHUB_PAGES_PREVIEW;
 /* @begin: remark-plugin > fix images paths */
 // https://thevalleyofcode.com/lesson/astro-content/markdown-image-path/
 
-interface CustomDataProperties {
-  // required: original src
-  src: string;
-  alt: string;
-
-  // any getImage options:
-  format: string;
-  widths: number[];
-  quality: number;
-  loading: string;
-  decoding: string;
-  inferSize: boolean;
-  index: number;
-}
-
-interface CustomData extends Data {
-  hProperties?: CustomDataProperties;
-}
-
 interface CustomNode extends Node {
   url: string;
   alt?: string;
-
-  data?: CustomData;
-
-  properties?: any;
 }
 
 const fixImagePaths: RemarkPlugin = (_options) => {
   const UPLOADS_PREFIX = '/uploads/';
   const STRAPI_UPLOADS_PREFIX = `${STRAPI_URL}${UPLOADS_PREFIX}`;
-
-  let index = 0;
-
-  /*
-    how to write a remark plugin that uses the astro getImage to download and optimize images from a markdown content | Perplexity.ai
-    https://www.perplexity.ai/search/how-to-download-and-optimize-t-3TpcbuT4QyaEaZjAUGpkaw#1
-  */
-  const setStrapiCMSImageProperties = (node: CustomNode) => {
-    if (!node.url.startsWith(STRAPI_UPLOADS_PREFIX)) return;
-
-    // TODO: remove
-    console.log(`Strapi CMS Image > ${node.url}`);
-
-    // Ensure data and hProperties objects
-    node.data ||= {};
-    node.data.hProperties ||= {} as CustomDataProperties;
-
-    // These props are serialized into __ASTRO_IMAGE_ and later used by getImage
-    // https://docs.astro.build/en/reference/modules/astro-assets/#getimage
-    Object.assign(node.data.hProperties, {
-      // required: original src
-      src: node.url,
-      alt: node.alt || '',
-
-      // any getImage options:
-      format: 'webp', // or ['webp', 'avif', 'png']
-      widths: [480, 768, 1200],
-      quality: 80,
-      loading: 'lazy',
-      decoding: 'async',
-
-      // Remote‑specific helper: infer dimensions if you don't know them
-      inferSize: true,
-
-      // Used by Astro to distinguish multiple occurrences of same src
-      index: index++
-    });
-  };
 
   const visitor: Visitor<CustomNode> = (node) => {
     const url = node.url;
@@ -119,8 +58,6 @@ const fixImagePaths: RemarkPlugin = (_options) => {
     if (url.startsWith(UPLOADS_PREFIX)) {
       node.url = url.replace(UPLOADS_PREFIX, `${STRAPI_UPLOADS_PREFIX}`);
     }
-
-    setStrapiCMSImageProperties(node);
   };
 
   return (tree) => {
@@ -135,7 +72,6 @@ const baseConfig: AstroUserConfig = {
   i18n: i18nConfig,
 
   image: {
-    //domains: [STRAPI_IMAGE_REMOTE_PATTERN.hostname],
     remotePatterns: [STRAPI_IMAGE_REMOTE_PATTERN]
   },
 
