@@ -1,4 +1,4 @@
-# strapicms-astro-client [ 🚧 under development... 🚧 ]
+# strapicms-astro-client
 
 - Project template [[GitHub] erkobridee/astro-ts-tw-hello](https://github.com/erkobridee/astro-ts-tw-hello)
 
@@ -80,3 +80,26 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
   - [renderMarkdown](https://docs.astro.build/en/reference/content-loader-reference/#rendermarkdown)
 
 - [[GitHub] natemoo-re/astro-remote](https://github.com/natemoo-re/astro-remote) - Render remote HTML or Markdown content in Astro with full control over the output
+
+#### Astro known issue
+
+**Astro version:** `v5.17.x`
+
+**Description:** Missing of remote image support for the content processed by the Astro Collections, which uses the `content-layer` ( `createMarkdownProcessor` [line 144](https://github.com/withastro/astro/blob/astro%405.17.1/packages/astro/src/content/content-layer.ts#L144) ). The remote image is only supported on the local files by `vite-plugin-markdown` ( `createMarkdownProcessor` [line 64](https://github.com/withastro/astro/blob/astro%405.17.1/packages/astro/src/vite-plugin-markdown/index.ts#L64) ). Both places uses `@astrojs/markdown-remark` ( `createMarkdownProcessor` ).
+
+**Current solution / workaround:** ( _20260205_ ) Use the `astro-remote` library to render the markdown content and define a custom image component to be used and correctly process the image defined inside of the markdow content.
+
+**Example of the issue**
+
+- https://erkobridee.com/strapicms-astro-client/en/blogs/content-with-images/
+
+- `src/pages/[locale]/blogs/[slug].astro`
+  - `astro:content` ( lines [127](https://github.com/erkobridee/strapicms-astro-client/blob/8b3c0e5731f783c26dda286ec2b26958853dedaf/src/pages/%5Blocale%5D/blogs/%5Bslug%5D.astro#L127) and [218](https://github.com/erkobridee/strapicms-astro-client/blob/8b3c0e5731f783c26dda286ec2b26958853dedaf/src/pages/%5Blocale%5D/blogs/%5Bslug%5D.astro#L218) )
+
+  - `astro-remote - Markdown` ( [line 229](https://github.com/erkobridee/strapicms-astro-client/blob/8b3c0e5731f783c26dda286ec2b26958853dedaf/src/pages/%5Blocale%5D/blogs/%5Bslug%5D.astro#L229) )
+    - [RemoteMarkdown](https://github.com/erkobridee/strapicms-astro-client/blob/8b3c0e5731f783c26dda286ec2b26958853dedaf/src/components/RemoteMarkdown/component.astro)
+      - [MarkdownImage](https://github.com/erkobridee/strapicms-astro-client/blob/8b3c0e5731f783c26dda286ec2b26958853dedaf/src/components/RemoteMarkdown/MarkdownImage.astro)
+
+  - `astro-remote - RemoteHTML` ( [line 240](https://github.com/erkobridee/strapicms-astro-client/blob/8b3c0e5731f783c26dda286ec2b26958853dedaf/src/pages/%5Blocale%5D/blogs/%5Bslug%5D.astro#L240C8-L240C18) )
+    - [RemoteHTML](https://github.com/erkobridee/strapicms-astro-client/blob/8b3c0e5731f783c26dda286ec2b26958853dedaf/src/components/RemoteHTML/component.astro)
+      - [HTMLImage](https://github.com/erkobridee/strapicms-astro-client/blob/8b3c0e5731f783c26dda286ec2b26958853dedaf/src/components/RemoteHTML/HTMLImage.astro)
