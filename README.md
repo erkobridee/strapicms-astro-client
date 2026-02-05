@@ -83,6 +83,8 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 #### Astro known issue
 
+- [Missing support for remote image configuration a the content-layer · Issue #15417 · withastro/astro](https://github.com/withastro/astro/issues/15417)
+
 **Astro version:** `v5.17.x`
 
 **Description:** Missing of remote image support for the content processed by the Astro Collections, which uses the `content-layer` ( `createMarkdownProcessor` [line 144](https://github.com/withastro/astro/blob/astro%405.17.1/packages/astro/src/content/content-layer.ts#L144) ). The remote image is only supported on the local files by `vite-plugin-markdown` ( `createMarkdownProcessor` [line 64](https://github.com/withastro/astro/blob/astro%405.17.1/packages/astro/src/vite-plugin-markdown/index.ts#L64) ). Both places uses `@astrojs/markdown-remark` ( `createMarkdownProcessor` ).
