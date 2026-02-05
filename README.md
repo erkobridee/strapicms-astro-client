@@ -59,8 +59,6 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 - [Mastering Astro.js Images | Caisy](https://caisy.io/blog/astro-js-images)
 
-- [how to download and optimize the markdown images from a headless cms on astro | Perplexity.ai](https://www.perplexity.ai/search/how-to-download-and-optimize-t-3TpcbuT4QyaEaZjAUGpkaw)
-
 - [How to use optimized images in Astro | Fogbender](https://fogbender.com/blog/optimize-images-in-astro-with-assets-integration/)
 
 - [Preloading images with Astro | Alex Nguyen - Web Developer](https://alexnguyen.co.nz/blog/preloading-images-with-astro/)
@@ -80,3 +78,5 @@ Following a Linux/Unix OS approach, we have the following alias mapping `~/* -> 
 
 - [Astro Content Loader API | Astro Docs](https://docs.astro.build/en/reference/content-loader-reference/)
   - [renderMarkdown](https://docs.astro.build/en/reference/content-loader-reference/#rendermarkdown)
+
+- [[GitHub] natemoo-re/astro-remote](https://github.com/natemoo-re/astro-remote) - Render remote HTML or Markdown content in Astro with full control over the output
