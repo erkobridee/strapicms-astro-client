@@ -64,5 +64,8 @@
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
   },
-  "github_pages": "https://erkobridee.github.io"
+  "github_pages": "https://erkobridee.github.io",
+  "engines": {
+    "node": ">=20.18.2 <=22.x.x"
+  }
 }
