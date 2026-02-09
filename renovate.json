@@ -3,5 +3,18 @@
   "extends": [
     "config:recommended"
   ],
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "npm"
+      ],
+      "matchPackageNames": [
+        "eslint"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ]
+    }
+  ],
   "npmrc": "legacy-peer-deps=true"
 }
