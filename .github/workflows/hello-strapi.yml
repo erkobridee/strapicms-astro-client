@@ -1,0 +1,16 @@
+# Passing Body Data in Strapi Webhooks: Triggering GitHub Workflows Example | u11d
+# https://u11d.com/blog/passing-body-data-in-strapi-webhooks-triggering-git-hub-workflows-example/
+
+name: Hello Strapi Workflow
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [strapi_triggers_github_workflow]
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print greeting
+        run: echo "Hello, Strapi!"
