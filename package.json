@@ -21,7 +21,7 @@
     "deploy": "run-s gh-pages-build gh-pages-deploy"
   },
   "dependencies": {
-    "astro": "5.17.1"
+    "astro": "5.17.2"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.6",
