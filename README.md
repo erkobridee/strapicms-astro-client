@@ -4,6 +4,17 @@
 
 - This project is a frontend for [[GitHub] erkobridee/strapicms-server](https://github.com/erkobridee/strapicms-server)
 
+## 📑 TODO
+
+- Review and improve the code to support local and cloud Strapi instances
+
+- Review and improve the astro config to setup the local or cloud Strapi instance
+  - make the blogs and pages images from Strapi support both cases
+
+- Define a new GitHub Action to build and deploy the static pages loading the content from the cloud Strapi instance
+
+- Remove the hardcoded Strapi Cloud instance and make it to be defined as an environment variable
+
 ## Local Development
 
 - [VS Code](https://code.visualstudio.com/) + [Development Containers](https://containers.dev/) ( [Customizations](https://containers.dev/supporting#visual-studio-code) | [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) )

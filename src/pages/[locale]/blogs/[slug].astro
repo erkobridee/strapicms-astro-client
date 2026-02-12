@@ -15,7 +15,7 @@ import RemoteHTML from '~/components/RemoteHTML';
 
 import { getEntries, mapByLocale } from '~/content/utils/blogs';
 
-import { STRAPI_URL, SITE_TITLE, locales } from '~/settings';
+import { /*STRAPI_URL,*/ SITE_TITLE, locales } from '~/settings';
 
 //----------------------------------------------------------------------------//
 
@@ -77,7 +77,8 @@ export async function getStaticPaths() {
       let imageAltText: string | undefined;
 
       if (cover) {
-        imageUrl = cover.url ? `${STRAPI_URL}${cover.url}` : undefined;
+        //imageUrl = cover.url ? `${STRAPI_URL}${cover.url}` : undefined;
+        imageUrl = cover.url ? cover.url : undefined;
         imageAltText = coverAltText || cover.alternativeText || cover.name;
       }
 

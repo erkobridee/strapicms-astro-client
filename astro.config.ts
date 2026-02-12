@@ -14,8 +14,10 @@ import tailwindcss from '@tailwindcss/vite';
 import { visit } from 'unist-util-visit';
 
 import {
-  STRAPI_URL,
+  // STRAPI_URL,
   STRAPI_IMAGE_REMOTE_PATTERN,
+  STRAPI_MEDIA_DOMAIN,
+  STRAPI_MEDIA_URL,
   i18nConfig
 } from './src/settings';
 
@@ -42,7 +44,7 @@ interface CustomNode extends Node {
 
 const fixImagePaths: RemarkPlugin = (_options) => {
   const UPLOADS_PREFIX = '/uploads/';
-  const STRAPI_UPLOADS_PREFIX = `${STRAPI_URL}${UPLOADS_PREFIX}`;
+  //const STRAPI_UPLOADS_PREFIX = `${STRAPI_URL}${UPLOADS_PREFIX}`;
 
   const visitor: Visitor<CustomNode> = (node) => {
     const url = node.url;
@@ -53,10 +55,13 @@ const fixImagePaths: RemarkPlugin = (_options) => {
 
     if (url.startsWith('/src/')) {
       node.url = url.replace('/src/', '~/');
+      return;
     }
 
     if (url.startsWith(UPLOADS_PREFIX)) {
-      node.url = url.replace(UPLOADS_PREFIX, `${STRAPI_UPLOADS_PREFIX}`);
+      //node.url = url.replace(UPLOADS_PREFIX, STRAPI_UPLOADS_PREFIX);
+
+      node.url = url.replace(UPLOADS_PREFIX, `${STRAPI_MEDIA_URL}/`);
     }
   };
 
@@ -72,6 +77,7 @@ const baseConfig: AstroUserConfig = {
   i18n: i18nConfig,
 
   image: {
+    domains: [STRAPI_MEDIA_DOMAIN],
     remotePatterns: [STRAPI_IMAGE_REMOTE_PATTERN]
   },
 
