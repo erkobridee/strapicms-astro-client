@@ -1,8 +1,8 @@
 import { b as createAstro, c as createComponent, m as maybeRenderHead, d as addAttribute, e as renderSlot, a as renderTemplate, f as renderJSX, g as createVNode, r as renderComponent, F as Fragment, u as unescapeHTML } from './astro/server-YktA_3qI.js';
 import 'piccolore';
 import 'clsx';
-import { c as cn, b as STRAPI_URL } from './index-Cxl7ktIA.js';
-import { $ as $$Image } from './_astro_assets-CjBhJ4PA.js';
+import { c as cn, b as STRAPI_URL } from './index-BGdCAG8H.js';
+import { $ as $$Image } from './_astro_assets-BS46Dw6k.js';
 import { transform, __unsafeHTML } from 'ultrahtml';
 import sanitize from 'ultrahtml/transformers/sanitize';
 import swap from 'ultrahtml/transformers/swap';

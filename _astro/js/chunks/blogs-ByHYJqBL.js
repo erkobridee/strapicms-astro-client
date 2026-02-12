@@ -1,4 +1,4 @@
-import { i as isCIEnv, g as getCollection } from './env-S4Cj9t-5.js';
+import { i as isCIEnv, g as getCollection } from './env-BjDqgn-B.js';
 
 const getEntries = async () => isCIEnv ? [] : await getCollection("blogs");
 const getEntriesSorted = async () => await getEntries().then(
