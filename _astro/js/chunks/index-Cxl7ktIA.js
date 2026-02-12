@@ -1,4 +1,4 @@
-import { b as createAstro, c as createComponent, d as addAttribute, k as renderScript, a as renderTemplate, r as renderComponent, F as Fragment, l as renderHead, e as renderSlot, u as unescapeHTML, m as maybeRenderHead, s as spreadAttributes } from './astro/server-D0T6fP_R.js';
+import { b as createAstro, c as createComponent, d as addAttribute, k as renderScript, a as renderTemplate, r as renderComponent, F as Fragment, l as renderHead, e as renderSlot, u as unescapeHTML, m as maybeRenderHead, s as spreadAttributes } from './astro/server-YktA_3qI.js';
 import 'piccolore';
 import { clsx } from 'clsx';
 /* empty css                         */
@@ -74,7 +74,10 @@ const $$Link = createComponent(($$result, $$props, $$slots) => {
   ), "class")} data-astro-cid-mbqdmgin> ${renderSlot($$result, $$slots["default"])} </a>`;
 }, "/home/x-bridee.e/dev_personal/strapicms-astro-client/src/components/Link.astro", void 0);
 
-const STRAPI_URL = "http://localhost:1337";
+const STRAPI_CLOUD_PROJECT_ID = "different-excellence-665ae44142";
+const strapiCloudInstanceURL = `https://${STRAPI_CLOUD_PROJECT_ID}.strapiapp.com`;
+const STRAPI_URL = strapiCloudInstanceURL;
+const { protocol, hostname, port } = new URL(STRAPI_URL);
 const SITE_TITLE = "Strapi CMS Astro Client";
 const languageByLocale = {
   en: "English",
