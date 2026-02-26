@@ -91,7 +91,7 @@ const baseConfig: AstroUserConfig = {
   integrations: [mdx()],
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [(tailwindcss as any)()],
 
     // https://docs.astro.build/en/recipes/customizing-output-filenames/
     build: {
