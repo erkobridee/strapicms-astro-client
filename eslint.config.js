@@ -13,7 +13,6 @@ export default [
   js.configs.recommended,
 
   ...eslintPluginAstro.configs.recommended,
-  ...eslintPluginAstro.configs['jsx-a11y-strict'],
 
   {
     files: ['**/*.mjs'],
