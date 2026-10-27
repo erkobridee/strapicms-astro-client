@@ -35,7 +35,7 @@
     "@typescript-eslint/eslint-plugin": "8.72.0",
     "@typescript-eslint/parser": "8.72.0",
     "astro-remote": "0.3.4",
-    "autoprefixer": "10.6.1",
+    "autoprefixer": "10.6.2",
     "clsx": "2.1.1",
     "cross-env": "10.1.0",
     "eslint": "9.39.5",
